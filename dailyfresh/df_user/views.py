@@ -1,6 +1,6 @@
 # coding=utf-8
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import UserInfo
 from hashlib import sha1
 
@@ -18,8 +18,8 @@ def register_handler(request):
     # 密码加密
     s1 = sha1()
     s1.update(pwd.encode('utf-8'))
-    pwd = s1.hexdigest()
-    user = UserInfo.user.create_user(user_name, pwd, email)
+    pwd1 = s1.hexdigest()
+    user = UserInfo.user.create_user(user_name, pwd1, email)
 
     return HttpResponse(pwd)
 
@@ -32,21 +32,37 @@ def user_name_validate(request):
 
 
 def login(request):
-    return render(request, 'df_user/login.html', {'title': '登录'})
+    user_name = request.COOKIES.get('user_name', '')
+    context = {'title': '登录', 'user_name': user_name}
+    return render(request, 'df_user/login.html', context)
 
 
 def login_handler(request):
     post = request.POST
     user_name = post.get('username')
     pwd = post.get('pwd')
-    remember = post.get('remember', None)
-    name = UserInfo.user.filter(user_name=user_name)
-    if 0 == len(name):
-        error_user = True
-        context = {'title': '登录', 'error_user': error_user, 'user_name': user_name, 'pwd': pwd}
-        return render(request, 'df_user/login.html', context)
-        
-    return HttpResponse('%s, %s, %s' % (user_name, pwd, remember))
+    remember = post.get('remember', '0')
+    users = UserInfo.user.filter(user_name=user_name)
+    if 1 == len(users):
+        s1 = sha1()
+        s1.update(pwd.encode('utf-8'))
+        pwd1 = s1.hexdigest()
+        if pwd1 == users[0].pwd:
+            red = HttpResponseRedirect('/user/info')
+            if '1' == remember:
+                red.set_cookie('user_name', user_name)
+            else:
+                red.set_cookie('user_name', '', max_age=-1)
+            request.session['user_id'] = users[0].id
+            request.session['user_name'] = user_name
+            return red
+        else:
+            context = {'title': '登录', 'error_user': '0', 'error_pwd': '1', 'user_name': user_name, 'pwd': pwd}
+            return render(request, 'df_user/login.html', context)
+
+    context = {'title': '登录', 'error_user': '1', 'error_pwd': '0', 'user_name': user_name, 'pwd': pwd}
+    return render(request, 'df_user/login.html', context)
+
 
 
 def info(request):

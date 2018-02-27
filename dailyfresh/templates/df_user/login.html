@@ -4,13 +4,34 @@
     var error_name =  true;
     var error_pwd = true;
 	$(function () {
+
 		$('#username').blur(function () {
-			check_username()
+			check_username();
         });
 
 		$('#pwd').blur(function () {
-			check_pwd()
+			check_pwd();
         });
+		$('#username').focus(function () {
+		    $('.user_error').hide();
+        });
+
+		$('#pwd').focus(function () {
+		    $('.pwd_error').hide();
+        });
+		// if(0=={{error_user}}){
+	     //    $('.user_error').html("用户名不存在！").show()
+		// }
+        var error_user = $('#error_user').html();
+        var error_pwd = $('#error_pwd').html();
+		if('1' == error_user){
+		   $('.user_error').html("用户名不存在！").show()
+		}
+		if('1' == error_pwd){
+		   $('.pwd_error').html("密码错误！").show()
+		}
+
+
     });
 
 	function check_username() {
@@ -62,17 +83,19 @@
 				<div class="form_input">
 					<form action="/user/login_handler/" method="post" onsubmit="return check_submit()">
 						{%csrf_token%}
-						<input type="text" name="username" id="username" class="name_input" placeholder="请输入用户名">
+						<input type="text" name="username" id="username" value="{{user_name}}" class="name_input" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>
-						<input type="password" name="pwd" id="pwd" class="pass_input" placeholder="请输入密码">
+						<input type="password" name="pwd" id="pwd" value="{{pwd}}" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_error">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" id="remember" name="remember" checked="checked">
+							<input type="checkbox" id="remember" name="remember" value="1" checked="checked">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>
 						<input type="submit" name="" value="登录" class="input_submit">
 					</form>
+                    <span hidden="hidden" id="error_user">{{error_user}}</span>
+					<span hidden="hidden" id="error_pwd">{{error_pwd}}</span>
 				</div>
 			</div>
 		</div>
