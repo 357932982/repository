@@ -10,17 +10,33 @@ $(function(){
 		check_user_name();
 	});
 
+	$('#user_name').focus(function () {
+		$('#user_name').next().hide();
+    });
+
 	$('#pwd').blur(function() {
 		check_pwd();
 	});
+
+	$('#pwd').focus(function () {
+		$('#pwd').next().hide();
+    });
 
 	$('#cpwd').blur(function() {
 		check_cpwd();
 	});
 
+	$('#cpwd').focus(function () {
+		$('#cpwd').next().hide();
+    });
+
 	$('#email').blur(function() {
 		check_email();
 	});
+
+	$('#email').focus(function () {
+		$('#email').next().hide();
+    });
 
 	$('#allow').click(function() {
 		if($(this).is(':checked'))
@@ -63,7 +79,6 @@ function check_user_name(){
 	var user_name = $('#user_name').val();
 	var tip = $('#user_name').next();
 	var len = user_name.length;
-
 	if(len<5||len>20)
 	{
 		tip.html('请输入5-20个字符的用户名');
@@ -73,7 +88,7 @@ function check_user_name(){
 	else
 	{
 		// 判断用户名是否存在
-		$.get("user_name_validate/",{name: user_name}, function(data){
+		$.get("/user/user_name_validate/",{name: user_name}, function(data){
 			if("0"!=data){
 				tip.html('该用户名已存在！');
 				tip.show();
@@ -120,7 +135,7 @@ function check_email(){
 }
 
 function check_submit(){
-    check_user_name();
+
     check_pwd();
     check_email();
     if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)

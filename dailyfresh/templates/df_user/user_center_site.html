@@ -1,5 +1,74 @@
 {% extends "df_user/user_center.html" %}
+{% block header %}
+    <style>
+        .error_tip{
+            float:left;
+            height:30px;
+            line-height:30px;
+            margin-left:70px;
+            color:#e62e2e;
+            display:none;
+        }
+    </style>
+    <script type="text/javascript">
+        var recv_error = false;
+        var addr_error = false;
+        var phone_error = false;
+        $(function(){
+            $('#receiver').blur(function () {
+                validate_recv();
+            });
+            $('#address').blur(function () {
+                {#validate_addr();#}
+            });
+            $('#phone').blur(function () {
+                validate_phone();
+            })
+        });
+        function validate_recv(){
+            var name = $('#receiver').val().trim();
+            if(name.length == 0){
+                $('#receiver').next().text("收件人不能为空！").show();
+                recv_error = true;
+            } else {
+                recv_error = false;
+                $('#receiver').next().hide();
+            }
+        }
+        function validate_addr(){
+            var name = $('#address').val().trim();
+            if(name.length == 0){
+                $('#addr').next().text("地址不能为空！").show();
+                addr_error = true;
+            } else {
+                addr_error = false;
+                $('#addr').next().hide()
+            }
+        }
+        function validate_phone(){
+            var name = $('#phone').val().trim();
+            if(name.length == 0){
+                $('#phone').next().text("手机号不能为空！").show();
+                phone_error = true;
+            } else {
+                phone_error = false;
+                $('#phone').next().hide();
+            }
+        }
+        function onsubmit(){
+            validate_recv();
+            validate_addr();
+            validate_phone();
+            if(recv_error == false && addr_error == false && phont_error == false) {
+                return true;
+            } else {
+                return false;
+            }
 
+        }
+    </script>
+
+{% endblock header %}
 {% block user_center %}
 	<div class="main_con clearfix">
 		<div class="left_menu_con clearfix">
@@ -15,27 +84,34 @@
 				<div class="site_con">
 					<dl>
 						<dt>当前地址：</dt>
-						<dd>北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+						<dd>{{ address_info }}</dd>
 					</dl>					
 				</div>
 				<h3 class="common_title2">编辑地址</h3>
 				<div class="site_con">
-					<form>
+					<form action="/user/address_handler/" method="post" onsubmit="return onsubmit()">
+                        {% csrf_token %}
 						<div class="form_group">
 							<label>收件人：</label>
-							<input type="text" name="">
+							<input type="text" id="receiver" name="receiver"> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="error_tip">提示信息</span>
 						</div>
 						<div class="form_group form_group2">
 							<label>详细地址：</label>
-							<textarea class="site_area"></textarea>
+                            <div id="addr" style="display: inline"><textarea class="site_area" id="address" name="address"></textarea></div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <div>
+                                <span class="error_tip">提示信息</span>
+                            </div>
 						</div>
 						<div class="form_group">
 							<label>邮编：</label>
-							<input type="text" name="">
+							<input type="text" id="post_add" name="post_add">
 						</div>
 						<div class="form_group">
 							<label>手机：</label>
-							<input type="text" name="">
+							<input type="text" id="phone" name="phone"> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="error_tip">提示信息</span>
 						</div>
 
 						<input type="submit" name="" value="提交" class="info_submit">
