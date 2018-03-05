@@ -19,7 +19,7 @@
                 validate_recv();
             });
             $('#address').blur(function () {
-                {#validate_addr();#}
+
             });
             $('#phone').blur(function () {
                 validate_phone();
@@ -57,7 +57,6 @@
         }
         function onsubmit(){
             validate_recv();
-            validate_addr();
             validate_phone();
             if(recv_error == false && addr_error == false && phont_error == false) {
                 return true;
