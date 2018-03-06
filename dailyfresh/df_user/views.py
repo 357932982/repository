@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render
 from .models import UserInfo
 from hashlib import sha1
 
@@ -39,14 +39,14 @@ def login(request):
 
 
 def logout(request):
-    del request.session['user_name']
+    request.session.clear()
     return HttpResponseRedirect('/user/login')
 
 
 def login_handler(request):
     post = request.POST
-    user_name = post.get('username')
-    pwd = post.get('pwd')
+    user_name = post.get('username', '')
+    pwd = post.get('pwd', '')
     remember = post.get('remember', '0')
     users = UserInfo.user.filter(user_name=user_name)
     if 1 == len(users):

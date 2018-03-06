@@ -31,7 +31,7 @@ html,body{height:100%}
 	color:#ff8800;
 }
 
-.login_btn span,.logout_btn,.user_link span{
+.login_btn span,.user_link span{
 	color:#cecece;
 	margin:0 10px;
 }
