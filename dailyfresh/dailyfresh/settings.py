@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'df_user',
     'df_goods',
+    'tinymce',
     # 'middle',
 ]
 
@@ -138,3 +139,9 @@ LOGIN_EXEMPT_URLS = [
     'user/site/',
     'user/logout/',
 ]
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}

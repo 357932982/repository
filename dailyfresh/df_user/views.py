@@ -73,12 +73,12 @@ def login_handler(request):
 
 # 转到个人中心
 def info(request):
-    return render(request, 'df_user/user_center_info.html', {'title': '用户中心'})
+    return render(request, 'df_user/user_center_info.html', {'title': '用户中心', 'get_cart': 0})
 
 
 # 转到订单详情页
 def order(request):
-    return render(request, 'df_user/user_center_order.html', {'title': '用户中心'})
+    return render(request, 'df_user/user_center_order.html', {'title': '用户中心', 'get_cart': 0})
 
 
 # 转到收货地址页
@@ -94,7 +94,7 @@ def site(request):
     else:
         address_info = receiver_address + '(' + receiver + '收)' + receiver_phone
         print(address_info)
-    context = {'title': '用户中心', 'address_info': address_info}
+    context = {'title': '用户中心', 'get_cart': 0, 'address_info': address_info}
     return render(request, 'df_user/user_center_site.html', context)
 
 
