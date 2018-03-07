@@ -133,6 +133,8 @@ STATICFILES_DIRS = [
 
 
 LOGIN_EXEMPT_URLS = [
-    'user/login/',
-    'user/login_handler/',
+    'user/info/',
+    'user/order/',
+    'user/site/',
+    'user/logout/',
 ]
