@@ -1,8 +1,19 @@
 from django.shortcuts import render
 
+from .models import GoodsInfo, TypeInfo
+
 
 def index(request):
-    return render(request, 'df_goods/index.html', {'title': '首页', 'get_cart': 1})
+    type_list = TypeInfo.objects.all()
+    type_01 = type_list[0].goodsinfo_set.order_by('-id')[0:4]
+    type_02 = type_list[1].goodsinfo_set.order_by('-id')[0:4]
+    type_03 = type_list[2].goodsinfo_set.order_by('-id')[0:4]
+    type_04 = type_list[3].goodsinfo_set.order_by('-id')[0:4]
+    type_05 = type_list[4].goodsinfo_set.order_by('-id')[0:4]
+    type_06 = type_list[5].goodsinfo_set.order_by('-id')[0:4]
+    context = {'title': '首页', 'get_cart': 1, 'type_01': type_01, 'type_02': type_02, 'type_03': type_03,
+               'type_04': type_04, 'type_05': type_05, 'type_06': type_06}
+    return render(request, 'df_goods/index.html', context)
 
 
 def get_list(request):
