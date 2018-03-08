@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 from .models import GoodsInfo, TypeInfo
 
@@ -16,8 +17,17 @@ def index(request):
     return render(request, 'df_goods/index.html', context)
 
 
-def get_list(request):
-    return render(request, 'df_goods/list.html', {'title': '商品列表', 'get_cart': 1})
+def get_list(request, type, index):
+    print(type)
+    print(index)
+    goods_list = GoodsInfo.objects.filter(goods_type_id=int(type)).order_by('-id')
+    new_goods = goods_list[0:3]
+    p = Paginator(goods_list, 5)
+    page_num = p.num_pages
+    g_list = p.page(index).object_list
+    context = {'title': '商品列表', 'get_cart': 1, 'page_num': page_num,
+               'type': type, 'new_goods': new_goods, 'goods_list': g_list}
+    return render(request, 'df_goods/list.html', context)
 
 
 def cart(request):
