@@ -17,16 +17,19 @@ def index(request):
     return render(request, 'df_goods/index.html', context)
 
 
-def get_list(request, type, index):
-    print(type)
-    print(index)
-    goods_list = GoodsInfo.objects.filter(goods_type_id=int(type)).order_by('-id')
+def get_list(request, type, sort, index):
+    typeinfo =TypeInfo.objects.get(pk=int(type))
+    if sort == '1':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(type)).order_by('-id')
+    if sort == '2':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(type)).order_by('-goods_price')
+    if sort == '3':
+        goods_list = GoodsInfo.objects.filter(goods_type_id=int(type)).order_by('-goods_click')
     new_goods = goods_list[0:3]
-    p = Paginator(goods_list, 5)
-    page_num = p.num_pages
-    g_list = p.page(index).object_list
-    context = {'title': '商品列表', 'get_cart': 1, 'page_num': page_num,
-               'type': type, 'new_goods': new_goods, 'goods_list': g_list}
+    paginator = Paginator(goods_list, 1)
+    page = paginator.page(int(index))
+    context = {'title': '商品列表', 'get_cart': 1, 'page': page, 'paginator': paginator,
+               'typeinfo': typeinfo, 'new_goods': new_goods, 'sort': sort}
     return render(request, 'df_goods/list.html', context)
 
 

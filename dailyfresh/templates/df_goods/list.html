@@ -1,5 +1,27 @@
 {% extends 'df_goods/base_goods.html' %}
-
+{% block header %}
+<script type="text/javascript">
+				// {% if page.has_previous %}
+				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.previous_page_number}}">&lt;上一页</a>
+				// {% endif %}
+                //
+				// {% for index in paginator.page_range %}
+				// {% if index == page.number %}
+				// <a href="#" class="active">{{ index }}</a>
+                // {% else %}
+				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{index}}">{{ index }}</a>
+				// {% endif %}}
+				// {% endfor%}
+                //
+				// {% if page.has_next %}
+				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.next_page_number}}">下一页&gt;</a>
+				// {% endif %}
+	var index_num = {{page.number}}
+	var count = {{pagination.num_pages}}
+    $(function () {
+    })
+</script>
+{% endblock %}
 {% block base_goods %}
 
 	<div class="navbar_con">
@@ -8,12 +30,12 @@
 				<h1>全部商品分类</h1>	
 				<span></span>			
 				<ul class="subnav">
-					<li><a href="#" class="fruit">新鲜水果</a></li>
-					<li><a href="#" class="seafood">海鲜水产</a></li>
-					<li><a href="#" class="meet">猪牛羊肉</a></li>
-					<li><a href="#" class="egg">禽类蛋品</a></li>
-					<li><a href="#" class="vegetables">新鲜蔬菜</a></li>
-					<li><a href="#" class="ice">速冻食品</a></li>
+					<li><a href="/goods/list1_1_1" class="fruit">新鲜水果</a></li>
+					<li><a href="/goods/list2_1_1" class="seafood">海鲜水产</a></li>
+					<li><a href="/goods/list3_1_1" class="meet">猪牛羊肉</a></li>
+					<li><a href="/goods/list4_1_1" class="egg">禽类蛋品</a></li>
+					<li><a href="/goods/list5_1_1" class="vegetables">新鲜蔬菜</a></li>
+					<li><a href="/goods/list6_1_1" class="ice">速冻食品</a></li>
 				</ul>
 			</div>
 			<ul class="navlist fl">
@@ -50,14 +72,26 @@
 
 		<div class="r_wrap fr clearfix">
 			<div class="sort_bar">
-				<a href="#" class="active">默认</a>
-				<a href="#">价格</a>
-				<a href="#">人气</a>
+				<a href="/goods/list{{typeinfo.id}}_1_1"
+                {% if sort == "1" %}
+                class="active"
+                {% endif %}
+				>默认</a>
+				<a href="/goods/list{{typeinfo.id}}_2_1"
+                {% if sort == "2" %}
+                class="active"
+                {% endif %}
+				>价格</a>
+				<a href="/goods/list{{typeinfo.id}}_3_1"
+                {% if sort == "3" %}
+                class="active"
+                {% endif %}
+				>人气</a>
 			</div>
 
 			<ul class="goods_type_list clearfix">
 
-                {% for goods in goods_list %}
+                {% for goods in page %}
 				<li>
 					<a href="detail.html"><img src="/static/{{ goods.goods_picture }}"></a>
 					<h4><a href="detail.html">{{ goods.goods_name }}</a></h4>
@@ -72,11 +106,33 @@
 			</ul>
 
 			<div class="pagenation">
-				<a href="#">&lt;上一页</a>
-                {% for index in range(1, int(page_num)) %}
-				<a href="#" class="active">{{ index }}</a>
-                {% endfor %}
-				<a href="#">下一页&gt;</a>
+				{% if page.has_previous %}
+				<a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.previous_page_number}}">&lt;上一页</a>
+				{% endif %}
+
+				{% for index in paginator.page_range %}
+                    {% if index == page.number %}
+						<!--{% if index >= 4 %}-->
+							{%if page.previous_page_number > 3 %}
+                            <a>...</a>
+                            <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.previous_page_number}}">{{ page.previous_page_number }}</a>
+							{% endif %}
+                            <a href="#" class="active">{{ index }}</a>
+							{% if page.next_page_number < paginator.num_pages %}
+                            <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.next_page_number}}">{{ page.next_page_number }}</a>
+                            <a>...</a>
+                            {% endif %}
+                        <!--{% endif %}-->
+
+                	{% endif %}
+                    {% if index < 4 or index == paginator.num_pages %}
+                        <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{index}}">{{ index }}</a>
+                    {% endif %}}
+				{% endfor%}
+
+				{% if page.has_next %}
+				<a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.next_page_number}}">下一页&gt;</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>
