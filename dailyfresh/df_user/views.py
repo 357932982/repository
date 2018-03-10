@@ -1,7 +1,9 @@
 # coding=utf-8
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+
 from .models import UserInfo
+from df_goods.models import GoodsInfo
 from hashlib import sha1
 
 
@@ -33,6 +35,7 @@ def user_name_validate(request):
 
 
 def login(request):
+    request.session.clear()
     user_name = request.COOKIES.get('user_name', '')
     context = {'title': '登录', 'user_name': user_name}
     return render(request, 'df_user/login.html', context)
@@ -73,7 +76,15 @@ def login_handler(request):
 
 # 转到个人中心
 def info(request):
-    return render(request, 'df_user/user_center_info.html', {'title': '用户中心', 'get_cart': 0})
+    goods_ids = request.COOKIES.get('goods_ids', '')
+    print(goods_ids)
+    goods_list = []
+    goods_id_list = goods_ids.split(',')
+    for goods_id in goods_id_list:
+        goods = GoodsInfo.objects.get(id=goods_id)
+        goods_list.append(goods)
+    context = {'title': '用户中心', 'get_cart': 0, 'goods_list': goods_list}
+    return render(request, 'df_user/user_center_info.html', context)
 
 
 # 转到订单详情页

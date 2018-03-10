@@ -69,19 +69,19 @@
 			<div class="subtitle fl">
 				<span>|</span>
                 {% for goods in type_01 %}
-				<a href="/{{goods.id}}/">{{goods.goods_name}}</a>
+				<a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a>
 				{% endfor %}
 			</div>
 			<a href="/goods/list1_1_1/" class="goods_more fr" id="fruit_more">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner01.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
 				{% for goods in type_01 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}
@@ -95,19 +95,19 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for goods in type_02 %}
-				<a href="/{{goods.id}}">{{goods.goods_name}}</a>
+				<a href="/goods/detail_{{goods.id}}">{{goods.goods_name}}</a>
 				{% endfor %}
 			</div>
 			<a href="/goods/list2_1_1/" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner02.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
                 {% for goods in type_02 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}
@@ -121,19 +121,19 @@
 			<div class="subtitle fl">
 				<span>|</span>
                 {% for goods in type_03 %}
-				<a href="/{{goods.id}}">{{goods.goods_name}}</a>
+				<a href="/goods/detail_{{goods.id}}">{{goods.goods_name}}</a>
 				{% endfor %}
 			</div>
 			<a href="/goods/list3_1_1/" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner03.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
                 {% for goods in type_03 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}
@@ -147,7 +147,7 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for goods in type_04 %}
-				<a href="/{{goods.id}}">{{goods.goods_name}}</a>
+				<a href="/goods/detail_{{goods.id}}">{{goods.goods_name}}</a>
 				{% endfor %}
 
 			</div>
@@ -155,12 +155,12 @@
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner04.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
                 {% for goods in type_04 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}
@@ -174,19 +174,19 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for goods in type_05 %}
-				<a href="/{{goods.id}}">{{goods.goods_name}}</a>
+				<a href="/goods/detail_{{goods.id}}">{{goods.goods_name}}</a>
 				{% endfor %}
 			</div>
 			<a href="/goods/list5_1_1/" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner05.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
 				{% for goods in type_05 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}
@@ -200,19 +200,19 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for goods in type_06 %}
-				<a href="/{{goods.id}}">{{goods.goods_name}}</a>
+				<a href="/goods/list_{{goods.id}}">{{goods.goods_name}}</a>
 				{% endfor %}
 			</div>
 			<a href="/goods/list6_1_1/" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="/static/images/banner06.jpg"></div>
+			<div class="goods_banner fl"><img src="/static/{{ goods.goods_picture }}"></div>
 			<ul class="goods_list fl">
 				{% for goods in type_06 %}
 				<li>
-					<h4><a href="/{{goods.id}}/">{{goods.goods_name}}</a></h4>
-					<a href="/{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
+					<h4><a href="/goods/detail_{{goods.id}}/">{{goods.goods_name}}</a></h4>
+					<a href="/goods/detail_{{goods.id}}/"><img src="/static/{{goods.goods_picture}}"></a>
 					<div class="prize">{{goods.goods_price}}</div>
 				</li>
 				{% endfor %}

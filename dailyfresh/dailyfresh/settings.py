@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'df_user',
     'df_goods',
+    'df_cart',
     'tinymce',
-    # 'middle',
+    'middle',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'middle.login_validate.Validate',
+    'middle.login_validate.Validate',
 ]
 
 ROOT_URLCONF = 'dailyfresh.urls'
@@ -140,6 +141,7 @@ LOGIN_EXEMPT_URLS = [
     'user/order/',
     'user/site/',
     'user/logout/',
+    'goods/cart/',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -147,3 +149,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 400,
 }
+

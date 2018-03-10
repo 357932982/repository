@@ -13,7 +13,7 @@ html,body{height:100%}
 	margin:0 auto;
 }
 
-.welcome,.login_info,.login_btn,.logout_btn,.user_link{
+.welcome,.login_info,.login_btn,.user_link{
 	line-height:29px;
 }
 
@@ -23,15 +23,15 @@ html,body{height:100%}
 
 .login_info em{color:#ff8800}
 
-.login_btn a,.logout_btn a,.user_link a{
+.login_btn a,.login_info a,.user_link a{
 	color:#666;
 }
 
-.login_btn a:hover,.logout_btn a:hover,.user_link a:hover{
+.login_btn a:hover, .login_info a:hover,.user_link a:hover{
 	color:#ff8800;
 }
 
-.login_btn span,.user_link span{
+.login_btn span, .login_info span, .user_link span{
 	color:#cecece;
 	margin:0 10px;
 }
