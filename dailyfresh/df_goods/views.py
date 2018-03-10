@@ -37,14 +37,15 @@ def cart(request):
     return render(request, 'df_goods/cart.html', {'title': '购物车', 'get_cart': 0})
 
 
-def detail(request, id):
+def detail(request, type, id):
+    typeinfo = TypeInfo.objects.get(pk=int(type))
     goods = GoodsInfo.objects.get(id=id)
     new_goods = GoodsInfo.objects.filter(goods_type_id=goods.goods_type_id).order_by('-id')[0:3]
-    context = {'title': '商品详情', 'get_cart': 1, 'goods': goods, 'new_goods': new_goods}
+    context = {'title': '商品详情', 'get_cart': 1, 'goods': goods, 'new_goods': new_goods, 'typeinfo': typeinfo}
     response = render(request, 'df_goods/detail.html', context)
     # 保存goods_id信息到cookie中
-    goods_ids = request.COOKIES.get('goods_ids', '')
-    if goods_ids != '':
+    goods_ids = request.COOKIES.get('goods_ids', -1)
+    if goods_ids != -1:
         goods_id_list = goods_ids.split(',')
         if goods_id_list.count(id) >= 1:
             goods_id_list.remove(id)

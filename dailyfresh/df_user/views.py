@@ -76,13 +76,14 @@ def login_handler(request):
 
 # 转到个人中心
 def info(request):
-    goods_ids = request.COOKIES.get('goods_ids', '')
+    goods_ids = request.COOKIES.get('goods_ids', -1)
     print(goods_ids)
     goods_list = []
-    goods_id_list = goods_ids.split(',')
-    for goods_id in goods_id_list:
-        goods = GoodsInfo.objects.get(id=goods_id)
-        goods_list.append(goods)
+    if goods_ids != -1:
+        goods_id_list = goods_ids.split(',')
+        for goods_id in goods_id_list:
+            goods = GoodsInfo.objects.get(id=goods_id)
+            goods_list.append(goods)
     context = {'title': '用户中心', 'get_cart': 0, 'goods_list': goods_list}
     return render(request, 'df_user/user_center_info.html', context)
 

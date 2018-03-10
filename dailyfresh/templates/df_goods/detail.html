@@ -1,7 +1,6 @@
-{% extends 'df_goods/base_goods.html' %}
-{% block base_goods_header %}
+{% extends 'base.html' %}
+{% block header %}
 
-	<script type="text/javascript" src="/staitc/js/jquery-1.12.2.js"></script>
 	<script type="text/javascript">
         $(function () {
             var price = {{ goods.goods_price }}
@@ -45,9 +44,9 @@
 		})
 	</script>
 
-{% endblock base_goods_header %}
+{% endblock header %}
 
-{% block base_goods %}
+{% block body %}
 
 	<div class="navbar_con">
 		<div class="navbar clearfix">
@@ -76,7 +75,7 @@
 	<div class="breadcrumb">
 		<a href="/goods/index/">全部分类</a>
 		<span>></span>
-		<a href="/goods/list1_1_1">新鲜水果</a>
+		<a href="/goods/list{{ typeinfo.id }}_1_1">{{ typeinfo.type_name }}</a>
 		<span>></span>
 		<a href="#">商品详情</a>
 	</div>
@@ -141,4 +140,4 @@
 
 	<div class="add_jump"></div>
 
-{% endblock base_goods %}
+{% endblock body %}
