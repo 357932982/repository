@@ -3,6 +3,7 @@
 
 	<script type="text/javascript">
         $(function () {
+            var goods_id = {{ goods.id }}
             var price = {{ goods.goods_price }}
             $('#add').click(function () {
                 var count = parseInt($('#ammount').val())+1;
@@ -18,30 +19,31 @@
                     $('#ammount').val(count-1);
                 }
             });
-            var count = 0;
+            var $add_x = $('#add_cart').offset().top;
+            var $add_y = $('#add_cart').offset().left;
+
+            var $to_x = $('#show_count').offset().top;
+            var $to_y = $('#show_count').offset().left;
+
+            $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
             $('#add_cart').on("click", function () {
-                count += 1;
-                $('#show_count').text(count);
-
-            })
+                var count = $('#ammount').val();
+                var url = '/cart/add_'+goods_id+'_'+count;
+                $.get(url, function (data) {
+                    $('#show_count').text(data.data);
+                });
+                add_jump();
+            });
+            function add_jump(){
+                $(".add_jump").stop().animate({
+                    'left': $to_y+7,
+                    'top': $to_x+7},
+                    "fast", function() {
+                        $(".add_jump").fadeOut('fast',function(){ });
+                });
+            }
         });
-		var $add_x = $('#add_cart').offset().top;
-		var $add_y = $('#add_cart').offset().left;
 
-		var $to_x = $('#show_count').offset().top;
-		var $to_y = $('#show_count').offset().left;
-
-		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
-		$('#add_cart').click(function(){
-			$(".add_jump").stop().animate({
-				'left': $to_y+7,
-				'top': $to_x+7},
-				"fast", function() {
-					$(".add_jump").fadeOut('fast',function(){
-						$('#show_count').html(2);
-					});
-			});
-		})
 	</script>
 
 {% endblock header %}

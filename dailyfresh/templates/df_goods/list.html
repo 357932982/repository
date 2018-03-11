@@ -1,24 +1,13 @@
 {% extends 'base.html' %}
 {% block header %}
 <script type="text/javascript">
-				// {% if page.has_previous %}
-				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.previous_page_number}}">&lt;上一页</a>
-				// {% endif %}
-                //
-				// {% for index in paginator.page_range %}
-				// {% if index == page.number %}
-				// <a href="#" class="active">{{ index }}</a>
-                // {% else %}
-				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{index}}">{{ index }}</a>
-				// {% endif %}}
-				// {% endfor%}
-                //
-				// {% if page.has_next %}
-				// <a href="/goods/list{{typeinfo.id}}_{{sort}}_{{page.next_page_number}}">下一页&gt;</a>
-				// {% endif %}
-	var index_num = {{page.number}}
-	var count = {{pagination.num_pages}}
     $(function () {
+        var count = 0;
+        $('#add_cart').on("click", function () {
+            count += 1;
+            $('#show_count').text(count);
+
+        })
     })
 </script>
 {% endblock %}
@@ -97,7 +86,7 @@
 					<div class="operate">
 						<span class="prize">￥{{ goods.goods_price }}</span>
 						<span class="unit">{{ goods.goods_price }}/500g</span>
-						<a href="/goods/detail{{ typeinfo.id }}_{{ goods.id }}/" class="add_goods" title="加入购物车"></a>
+						<a href="#" class="add_goods" id="add_cart" title="加入购物车"></a>
 					</div>
 				</li>
                 {% endfor %}

@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 
 from .models import GoodsInfo, TypeInfo
+from df_cart.models import CartInfo
 
 
 def index(request):
+    user_id = request.session.get('user_id')
     type_list = TypeInfo.objects.all()
     type_01 = type_list[0].goodsinfo_set.order_by('-id')[0:4]
     type_02 = type_list[1].goodsinfo_set.order_by('-id')[0:4]
@@ -12,6 +14,8 @@ def index(request):
     type_04 = type_list[3].goodsinfo_set.order_by('-id')[0:4]
     type_05 = type_list[4].goodsinfo_set.order_by('-id')[0:4]
     type_06 = type_list[5].goodsinfo_set.order_by('-id')[0:4]
+    totle = CartInfo.objects.filter(user_id=user_id).count()
+    request.session['totle'] = totle
     context = {'title': '首页', 'get_cart': 1, 'type_01': type_01, 'type_02': type_02, 'type_03': type_03,
                'type_04': type_04, 'type_05': type_05, 'type_06': type_06}
     return render(request, 'df_goods/index.html', context)
@@ -31,10 +35,6 @@ def get_list(request, type, sort, index):
     context = {'title': '商品列表', 'get_cart': 1, 'page': page, 'paginator': paginator,
                'typeinfo': typeinfo, 'new_goods': new_goods, 'sort': sort}
     return render(request, 'df_goods/list.html', context)
-
-
-def cart(request):
-    return render(request, 'df_goods/cart.html', {'title': '购物车', 'get_cart': 0})
 
 
 def detail(request, type, id):
@@ -57,7 +57,3 @@ def detail(request, type, id):
         goods_ids = id
     response.set_cookie('goods_ids', goods_ids)
     return response
-
-
-def place_order(request):
-    return render(request, 'df_goods/place_order.html', {'title': '提交订单', 'get_cart': 0})

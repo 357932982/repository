@@ -1,7 +1,6 @@
-{% extends 'df_goods/base_goods.html' %}
+{% extends 'base.html' %}
 
-{% block base_goods_header %}
-    <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+{% block header %}
 	<script type="text/javascript">
 		$('#order_btn').click(function() {
 			localStorage.setItem('order_finish',2);
@@ -10,15 +9,15 @@
 
 				setTimeout(function(){
 					$('.popup_con').fadeOut('fast',function(){
-						window.location.href = 'index.html';
+						window.location.href = '../df_goods/index.html';
 					});
 				},3000)
 
 			});
 		});
 	</script>
-{% endblock base_goods_header %}
-{% block base_goods %}
+{% endblock header %}
+{% block body %}
 
 	<h3 class="common_title">确认收货地址</h3>
 
@@ -97,6 +96,6 @@
 		<div class="mask"></div>
 	</div>
 
-{% endblock base_goods %}
+{% endblock body %}
 </body>
 </html>

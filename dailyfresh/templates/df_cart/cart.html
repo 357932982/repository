@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block header %}
+    <script type="text/javascript">
+        $(function () {
+            // 全选全消
+            $('#check_all').click(function () {
+                var state = $(this).prop('checked')
+                $(':checkbox:not(#check_all)').prop('checked', state)
+            });
+            // 选择与全选
+            $(':checkbox:not(#check_all)').click(function () {
+                if($(this).prop('checked')){
+                    if($(':checked').length+1 == $(':checkbox').length){
+                        $('#check_all').prop('checked', true)
+                    }
+                } else {
+                    $('#check_all').prop('checked',false)
+                }
+            });
+
+            totle();
+
+            $('.add').click(function () {
+                var before = parseInt($(this).next().val());
+                var text = $(this).next();
+                text.val(before+1).blur();
+            });
+
+            $('.minus').click(function () {
+                var before = parseInt($(this).prev().val());
+                if (before >= 2) {
+                    var text = $(this).prev();
+                    text.val(before-1).blur();
+                }
+            });
+            $('.num_show').blur(function () {
+                var count = parseInt($(this).val());
+                var temp = $(this);
+                    var id = $(this).parents('.cart_list_td').attr('id');
+                    $.get('/cart/change/', {'cart_id': id, 'count': count}, function (data) {
+                        if(data.info == 0){
+                            totle();
+                        } else {
+                            alert('想不想买了？');
+                            temp.val(data.info);
+                        }
+                    });
+
+            })
+
+            $('.col08').click(function () {
+                var id = $(this).parents('.cart_list_td').attr('id');
+                var del = confirm('确定要删除该商品吗？');
+                if(del){
+                    $.get('/cart/delete/', {'cart_id': id}, function (data) {
+                        if(data.info == 1){
+                            $('ul').remove('#'+id);
+                            totle();
+                        }
+                    })
+                }
+            })
+        });
+        function totle(){
+            var totle_items = 0;
+            var totle_count = 0;
+            $('.col07').each(function () {
+                var count = $(this).prev().find('input').val();
+                var price = $(this).prev().prev().text();
+                totle_items = parseFloat(count)*parseFloat(price);
+                $(this).text(totle_items.toFixed(2));
+                totle_count += totle_items;
+            });
+            $('#totle_count').text(totle_count.toFixed(2))
+        }
+    </script>
+{% endblock %}
+{% block body %}
+
+	<div class="total_count">全部商品<em>{{ length }}</em>件</div>
+	<ul class="cart_list_th clearfix">
+		<li class="col01">商品名称</li>
+		<li class="col02">商品单位</li>
+		<li class="col03">商品价格</li>
+		<li class="col04">数量</li>
+		<li class="col05">小计</li>
+		<li class="col06">操作</li>
+	</ul>
+    {% for item in cart_info %}
+	<ul class="cart_list_td clearfix" id="{{ item.id }}">
+		<li class="col01"><input type="checkbox" id="check" name="" checked></li>
+		<li class="col02"><img src="/static/{{ item.goods.goods_picture }}"></li>
+        <li class="col03">{{ item.goods.goods_name }}<br><em><span id="price">{{ item.goods.goods_price }}</span>元/{{ item.goods.goods_unity }}</em></li>
+		<li class="col04">{{ item.goods.goods_unity }}</li>
+		<li class="col05">{{ item.goods.goods_price }}元</li>
+		<li class="col06">
+			<div class="num_add">
+				<a href="javascript:;" class="add fl">+</a>
+				<input type="text" class="num_show fl" value={{ item.count }}>
+				<a href="javascript:;" class="minus fl">-</a>	
+			</div>
+		</li>
+		<li class="col07">元</li>
+		<li class="col08"><a href="javascript:;">删除</a></li>
+	</ul>
+    {% endfor %}
+
+	<ul class="settlements">
+		<li class="col01"><input type="checkbox" id="check_all" name="" checked=""></li>
+		<li class="col02">全选</li>
+		<li class="col03">合计(不含运费)：<span>¥</span><em id="totle_count"></em><br>共计<b>{{ length }}</b>件商品</li>
+		<li class="col04"><a href="place_order.html">去结算</a></li>
+	</ul>
+
+{% endblock body %}
