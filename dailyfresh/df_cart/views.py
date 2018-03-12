@@ -14,14 +14,6 @@ def cart(request):
     return render(request, 'df_cart/cart.html', context)
 
 
-def place_order(request):
-    user_id = request.session.get('user_id')
-    user = UserInfo.user.get(id=user_id)
-    carts = CartInfo.objects.filter(user_id=user_id)
-    context = {'title': '提交订单', 'get_cart': 0, 'user': user, 'carts': carts}
-    return render(request, 'df_cart/place_order.html', context)
-
-
 def add(request, id, count):
     user_id = request.session.get('user_id')
     goods_id = int(id)
