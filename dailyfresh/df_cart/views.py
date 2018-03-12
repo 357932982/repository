@@ -3,6 +3,7 @@ from django.http import JsonResponse
 
 from .models import CartInfo
 from df_goods.models import GoodsInfo
+from df_user.models import UserInfo
 
 
 def cart(request):
@@ -14,7 +15,11 @@ def cart(request):
 
 
 def place_order(request):
-    return render(request, 'df_cart/place_order.html', {'title': '提交订单', 'get_cart': 0})
+    user_id = request.session.get('user_id')
+    user = UserInfo.user.get(id=user_id)
+    carts = CartInfo.objects.filter(user_id=user_id)
+    context = {'title': '提交订单', 'get_cart': 0, 'user': user, 'carts': carts}
+    return render(request, 'df_cart/place_order.html', context)
 
 
 def add(request, id, count):
@@ -47,7 +52,7 @@ def change(request):
     try:
         cart_info = CartInfo.objects.get(id=cart_id)
         count = int(count)
-        print('count:',count)
+        print('count:', count)
         if count > 0:
             cart_info.count = count
             cart_info.save()

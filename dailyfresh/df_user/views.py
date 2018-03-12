@@ -49,9 +49,11 @@ def logout(request):
 def login_handler(request):
     post = request.POST
     user_name = post.get('username', '')
+    print('user_name: %s' % user_name)
     pwd = post.get('pwd', '')
     remember = post.get('remember', '0')
     users = UserInfo.user.filter(user_name=user_name)
+    print('数据库查询出来的：%s' % users[0].user_name)
     if 1 == len(users):
         s1 = sha1()
         s1.update(pwd.encode('utf-8'))
@@ -59,12 +61,14 @@ def login_handler(request):
         if pwd1 == users[0].user_password:
             red = HttpResponseRedirect('/user/info')
             if '1' == remember:
-                red.set_cookie('user_name', user_name)
+                # 这里一定要设置编码格式，不然报错
+                red.set_cookie('user_name', user_name.encode('utf-8'))
             else:
                 red.set_cookie('user_name', '', max_age=-1)
             request.session['user_id'] = users[0].id
             request.session['user_name'] = user_name
             request.session['user_email'] = users[0].user_email
+            print('hhh')
             return red
         else:
             context = {'title': '登录', 'error_user': '0', 'error_pwd': '1', 'user_name': user_name, 'pwd': pwd}
@@ -96,17 +100,8 @@ def order(request):
 # 转到收货地址页
 def site(request):
     user_id = request.session.get('user_id')
-    users = UserInfo.user.filter(id=user_id)
-    receiver = users[0].receiver
-    receiver_address = users[0].receiver_address
-    receiver_post = users[0].receiver_post
-    receiver_phone = users[0].receiver_phone
-    if receiver == '' or receiver_address == '' or receiver_phone == '' or receiver_post == '':
-        address_info = '没有数据！'
-    else:
-        address_info = receiver_address + '(' + receiver + '收)' + receiver_phone
-        print(address_info)
-    context = {'title': '用户中心', 'get_cart': 0, 'address_info': address_info}
+    user = UserInfo.user.get(id=user_id)
+    context = {'title': '用户中心', 'get_cart': 0, 'user': user}
     return render(request, 'df_user/user_center_site.html', context)
 
 

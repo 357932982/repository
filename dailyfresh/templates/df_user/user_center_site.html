@@ -82,8 +82,12 @@
 				<h3 class="common_title2">收货地址</h3>
 				<div class="site_con">
 					<dl>
+						{% if user.receiver != '' %}
 						<dt>当前地址：</dt>
-						<dd>{{ address_info }}</dd>
+						<dd>{{user.receiver_address}} （{{user.receiver}} 收）电话：{{user.receiver_phone}}</dd>
+						{% else %}
+						<dd>请填写收货人信息！</dd>
+						{% endif %}
 					</dl>					
 				</div>
 				<h3 class="common_title2">编辑地址</h3>
