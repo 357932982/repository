@@ -1,67 +1,118 @@
 {% extends "base.html" %}
 
+{% block header %}
+    <script type="text/javascript">
+        $(function () {
+            $('.oper_btn').click(function () {
+                var btn = $(this);
+                var status = $(this).next().val();
+                if(status == 'False'){
+                    var order_id = $(this).attr('id');
+                    var csrf = $(':input[name="csrfmiddlewaretoken"]').val();
+                    var send_data = {
+                        'order_id': order_id,
+                        'csrfmiddlewaretoken': csrf
+                    };
+                    $.post('/order/pay/', send_data, function (data) {
+                        if(data.state == true){
+                            alert('success, and money is:'+data.money);
+                            location.reload()
+                        } else {
+                            alert('failed, please try again later!')
+                        }
+                    })
+                }
+
+            })
+        })
+    </script>
+{% endblock header %}
+
 {% block body %}
+{% csrf_token %}
 	<div class="main_con clearfix">
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
 			<ul>
 				<li><a href="/user/info">· 个人信息</a></li>
-				<li><a href="/user/order" class="active">· 全部订单</a></li>
+				<li><a href="/user/order_1" class="active">· 全部订单</a></li>
 				<li><a href="/user/site">· 收货地址</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">
 				<h3 class="common_title2">全部订单</h3>
+
+            {% for item in page %}
 				<ul class="order_list_th w978 clearfix">
-					<li class="col01">2016-8-21 17:36:24</li>
-					<li class="col02">订单号：56872934</li>
-					<li class="col02 stress">未支付</li>		
+					<li class="col01">{{ item.order.order_date }}</li>
+					<li class="col02">订单号：{{ item.order.order_id }}</li>
+					<li class="col02 stress">
+                        {% if item.order.order_IsPay == False %}
+                            未支付
+                        {% else %}
+                            已支付
+                        {% endif %}
+                    </li>
 				</ul>
 
 				<table class="order_list_table w980">
 					<tbody>
 						<tr>
 							<td width="55%">
+                                {% for detail in item.details %}
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="/static/images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
+									<li class="col01"><img src="/static/{{ detail.goods.goods_picture }}"></li>
+									<li class="col02">{{ detail.goods.goods_name }}<em>{{ detail.price }}元/{{ detail.goods.goods_unity }}</em></li>
+									<li class="col03">{{ detail.count }}</li>
+									<li class="col04">{{ detail.item_total }}元</li>
 								</ul>
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="/static/images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
-									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
-								</ul>
+                                {% endfor %}
 							</td>
-							<td width="15%">33.60元</td>
+							<td width="15%">{{ item.order.order_total }}元</td>
+                        {% if item.order.order_IsPay == False %}
 							<td width="15%">待付款</td>
-							<td width="15%"><a href="#" class="oper_btn">去付款</a></td>
+                        {% else %}
+                            <td width="15%">已付款</td>
+                        {% endif %}
+							<td width="15%">
+                                <a href="#" status="{{ item.order_IsPay }}" id="{{ item.order.order_id }}" class="oper_btn">
+                                {% if item.order.order_IsPay == False %}
+                                    去付款
+                                {% else %}
+                                    已付款
+                                {% endif %}
+
+                                </a>
+                                <input value="{{ item.order.order_IsPay }}" type="hidden">
+                            </td>
 						</tr>
 					</tbody>
 				</table>
-				
+
+            {% endfor %}
+
+
+<!--
 				<ul class="order_list_th w978 clearfix">
 					<li class="col01">2016-8-21 17:36:24</li>
 					<li class="col02">订单号：56872934</li>
-					<li class="col02 stress">已支付</li>			
+					<li class="col02 stress">已支付</li>
 				</ul>
 				<table class="order_list_table w980">
 					<tbody>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
+								<ul class="order_goods_list clearfix">
 									<li class="col01"><img src="/static/images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
+									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>
 									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
+									<li class="col04">11.80元</li>
 								</ul>
-								<ul class="order_goods_list clearfix">					
+								<ul class="order_goods_list clearfix">
 									<li class="col01"><img src="/static/images/goods02.jpg"></li>
-									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>	
+									<li class="col02">嘎啦苹果嘎啦苹果<em>11.80元/500g</em></li>
 									<li class="col03">1</li>
-									<li class="col04">11.80元</li>	
+									<li class="col04">11.80元</li>
 								</ul>
 							</td>
 							<td width="15%">33.60元</td>
@@ -70,15 +121,25 @@
 						</tr>
 					</tbody>
 				</table>
-
+-->
 				<div class="pagenation">
-					<a href="#">&lt;上一页</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">下一页&gt;</a>
+                    {% if page.has_previous %}
+					<a href="/user/order_{{ page.previous_page_number }}">&lt;上一页</a>
+                    {% endif %}
+                    {% for index in paginator.page_range %}
+                        {% if index %}
+                            {% ifequal index page.number %}
+                                <a href="#" class="active">{{ index }}</a>
+                            {% else %}
+                                <a href="/user/order_{{ index }}">{{ index }}</a>
+                            {% endifequal %}
+                        {% else %}
+                            <a>...</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page.has_next %}
+					<a href="/user/order_{{ page.next_page_number }}">下一页&gt;</a>
+                    {% endif %}
 				</div>
 		</div>
 	</div>

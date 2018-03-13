@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^register_handler/$', views.register_handler, name='register_handler'),
     url(r'^user_name_validate/$', views.user_name_validate, name='user_name_validate'),
     url(r'^info/$', views.info, name='info'),
-    url(r'^order/$', views.order, name='order'),
+    url(r'^order_(\d+)/$', views.order, name='order'),
     url(r'^site/$', views.site, name='site'),
     url(r'^address_handler/$', views.address_handler, name='address_handler'),
 ]

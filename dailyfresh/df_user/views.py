@@ -1,9 +1,11 @@
 # coding=utf-8
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 from .models import UserInfo
 from df_goods.models import GoodsInfo
+from df_order.models import OrderInfo, OrderDetailInfo
 from hashlib import sha1
 
 
@@ -93,8 +95,20 @@ def info(request):
 
 
 # 转到订单详情页
-def order(request):
-    return render(request, 'df_user/user_center_order.html', {'title': '用户中心', 'get_cart': 0})
+def order(request, index):
+    user_id = request.session.get('user_id')
+    order_list = []
+    # 获取订单集合
+    orders = OrderInfo.objects.filter(user_id=user_id).order_by('-order_date')
+    # 获取订单详情
+    for item in orders:
+        details = OrderDetailInfo.objects.filter(order_id=item.order_id)
+        order_dict = {'order': item, 'details': details}
+        order_list.append(order_dict)
+    paginator = Paginator(order_list, 3)
+    page = paginator.page(int(index))
+    context = {'title': '用户中心', 'get_cart': 0, 'order_list': order_list, 'paginator': paginator, 'page': page}
+    return render(request, 'df_user/user_center_order.html', context)
 
 
 # 转到收货地址页

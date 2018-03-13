@@ -25,7 +25,7 @@
 
                     setTimeout(function () {
                         $('.popup_con').fadeOut('fast', function () {
-                            window.location.href = '/goods/index/';
+                            //window.location.href = '/goods/index/';
                         });
                     }, 3000)
 
@@ -36,19 +36,25 @@
                 // 获取用户选择收货地址id, 支付方式，所有购买的商品的ids
                 var address = $(':input[name="address"]:checked').val();
                 var pay_type = $(':input[name="pay_style"]:checked').val();
-                var goods_id_list = new Array();
-                $('.goods_id').each(function (index) {
-                    goods_id_list[index] = $(this).val();
+                var cart_id_list = new Array();
+                $('.goods_list_td').each(function (index) {
+                    cart_id_list[index] = $(this).attr('id');
                 });
+                var total_pay = $('#price').text();
                 var csrf = $(':input[name="csrfmiddlewaretoken"]').val();
                 var send_data = {
                     'address': address,
                     'pay_type': pay_type,
-                    'goods_id_list': goods_id_list,
+                    'total_pay': total_pay,
+                    'cart_id_list': cart_id_list.toString(),
                     'csrfmiddlewaretoken': csrf
                 };
                 $.post('/order/order_handler/', send_data, function (data) {
-
+                    if(data.data == 1){
+                        window.location.href = '/user/order_1/';
+                    } else {
+                        window.location.href = '/cart/cart/';
+                    }
                 });
             })
         })
@@ -63,8 +69,8 @@
         <dl>
             {% if user.receiver != '' %}
                 <dt>寄送到：</dt>
-                <dd><input type="radio" name="address" checked="">{{ user.receiver_address }} （{{ user.receiver }}
-                    收）电话：{{ user.receiver_phone }}
+                <dd><input type="radio" name="address" checked=""
+                           value="{{ user.receiver_address }} （{{ user.receiver }} 收）电话：{{ user.receiver_phone }}">
                 </dd>
             {% else %}
                 <dt>无</dt>
@@ -100,7 +106,7 @@
             <li class="col05">小计</li>
         </ul>
         {% for item in carts %}
-            <ul class="goods_list_td clearfix">
+            <ul class="goods_list_td clearfix" id="{{ item.id }}">
                 <li class="col01">{{ forloop.counter }}</li>
                 <li class="col02"><img src="/static/{{ item.goods.goods_picture }}"></li>
                 <li class="col03">{{ item.goods.goods_name }}</li>
@@ -109,7 +115,6 @@
                 <li class="col06">{{ item.count }}</li>
                 <li class="col07"><span></span>元</li>
             </ul>
-            <input type="hidden" value="{{ item.goods.id }}" class="goods_id">
         {% endfor %}
     </div>
 
@@ -117,7 +122,7 @@
 
     <div class="common_list_con clearfix">
         <div class="settle_con">
-            <div class="total_goods_count">共<em>2</em>件商品，总金额<b><span id="sum"></span>元</b></div>
+            <div class="total_goods_count">共<em>{{ item.count }}</em>件商品，总金额<b><span id="sum"></span>元</b></div>
             <div class="transit">运费：<b id="curry">10元</b></div>
             <div class="total_pay">实付款：<b><span id="price"></span>元</b></div>
         </div>

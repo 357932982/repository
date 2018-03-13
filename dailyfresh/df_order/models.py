@@ -16,4 +16,5 @@ class OrderDetailInfo(models.Model):
     order = models.ForeignKey(OrderInfo, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     count = models.IntegerField()
+    item_total = models.DecimalField(max_digits=6, decimal_places=2)
 
