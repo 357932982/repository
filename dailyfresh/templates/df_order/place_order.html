@@ -69,8 +69,8 @@
         <dl>
             {% if user.receiver != '' %}
                 <dt>寄送到：</dt>
-                <dd><input type="radio" name="address" checked=""
-                           value="{{ user.receiver_address }} （{{ user.receiver }} 收）电话：{{ user.receiver_phone }}">
+                <dd><input type="radio" name="address" checked="">
+                    {{user.receiver_address}} （{{user.receiver}} 收）电话：{{user.receiver_phone}}
                 </dd>
             {% else %}
                 <dt>无</dt>
