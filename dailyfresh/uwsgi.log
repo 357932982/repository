@@ -1,0 +1,218 @@
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Mar 15 22:36:34 2018] ***
+compiled with version: 5.4.0 20160609 on 15 March 2018 13:09:08
+os: Linux-4.13.0-37-generic #42~16.04.1-Ubuntu SMP Wed Mar 7 16:03:28 UTC 2018
+nodename: ubuntu
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /home/sony/Desktop/repository/dailyfresh
+writing pidfile to uwsgi.pid
+detected binary path: /home/sony/.virtualenvs/ttsx/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/sony/Desktop/repository/dailyfresh
+your processes number limit is 7677
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:9000 fd 3
+Python version: 3.5.2 (default, Nov 23 2017, 16:37:01)  [GCC 5.4.0 20160609]
+Python main interpreter initialized at 0x1bbb070
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+Traceback (most recent call last):
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/apps/config.py", line 107, in create
+    entry = module.default_app_config
+AttributeError: module 'middle' has no attribute 'default_app_config'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "dailyfresh/wsgi.py", line 16, in <module>
+    application = get_wsgi_application()
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/core/wsgi.py", line 12, in get_wsgi_application
+    django.setup(set_prefix=False)
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/apps/registry.py", line 89, in populate
+    app_config = AppConfig.create(entry)
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/apps/config.py", line 110, in create
+    return cls(entry, module)
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/apps/config.py", line 40, in __init__
+    self.path = self._path_from_module(app_module)
+  File "/home/sony/.virtualenvs/ttsx/lib/python3.5/site-packages/django/apps/config.py", line 73, in _path_from_module
+    "with a 'path' class attribute." % (module, paths))
+django.core.exceptions.ImproperlyConfigured: The app module <module 'middle' (namespace)> has multiple filesystem locations (['./middle', '/home/sony/Desktop/repository/dailyfresh/middle']); you must configure this app with an AppConfig subclass with a 'path' class attribute.
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 3085)
+spawned uWSGI worker 1 (pid: 3090, cores: 2)
+spawned uWSGI worker 2 (pid: 3091, cores: 2)
+spawned uWSGI worker 3 (pid: 3092, cores: 2)
+spawned uWSGI worker 4 (pid: 3094, cores: 2)
+--- no python application found, check your startup logs for errors ---
+[pid: 3091|app: -1|req: -1/1] 127.0.0.1 () {42 vars in 778 bytes} [Thu Mar 15 22:40:16 2018] GET /user/login => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 3090|app: -1|req: -1/2] 127.0.0.1 () {42 vars in 747 bytes} [Thu Mar 15 22:40:17 2018] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 3090)...
+Gracefully killing worker 2 (pid: 3091)...
+Gracefully killing worker 3 (pid: 3092)...
+Gracefully killing worker 4 (pid: 3094)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /home/sony/Desktop/repository/dailyfresh
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (127.0.0.1:9000)
+running /home/sony/.virtualenvs/ttsx/bin/uwsgi
+[uWSGI] getting INI configuration from uwsgi.ini
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Mar 15 22:55:57 2018] ***
+compiled with version: 5.4.0 20160609 on 15 March 2018 13:09:08
+os: Linux-4.13.0-37-generic #42~16.04.1-Ubuntu SMP Wed Mar 7 16:03:28 UTC 2018
+nodename: ubuntu
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /home/sony/Desktop/repository/dailyfresh
+detected binary path: /home/sony/.virtualenvs/ttsx/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/sony/Desktop/repository/dailyfresh
+your processes number limit is 7677
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 127.0.0.1:9000 fd 3
+Python version: 3.5.2 (default, Nov 23 2017, 16:37:01)  [GCC 5.4.0 20160609]
+Python main interpreter initialized at 0x9dea70
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+[re.compile('user/info/'), re.compile('user/order/'), re.compile('user/site/'), re.compile('user/logout/'), re.compile('goods/cart/')]
+WSGI app 0 (mountpoint='') ready in 6 seconds on interpreter 0x9dea70 pid: 3085 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 3085)
+spawned uWSGI worker 1 (pid: 3352, cores: 2)
+spawned uWSGI worker 2 (pid: 3353, cores: 2)
+spawned uWSGI worker 3 (pid: 3354, cores: 2)
+spawned uWSGI worker 4 (pid: 3357, cores: 2)
+[pid: 3352|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 809 bytes} [Thu Mar 15 22:56:37 2018] GET /user/login => generated 0 bytes in 4854 msecs (HTTP/1.1 301) 3 headers in 117 bytes (1 switches on core 0)
+None
+False
+[pid: 3353|app: 0|req: 1/2] 127.0.0.1 () {44 vars in 811 bytes} [Thu Mar 15 22:56:42 2018] GET /user/login/ => generated 5164 bytes in 6123 msecs (HTTP/1.1 200) 5 headers in 278 bytes (1 switches on core 0)
+None
+False
+None
+None
+False
+False
+[pid: 3353|app: 0|req: 2/3] 127.0.0.1 () {42 vars in 750 bytes} [Thu Mar 15 22:57:05 2018] GET /static/js/jquery-1.12.4.min.js => generated 104 bytes in 1527 msecs (HTTP/1.1 404) 4 headers in 115 bytes (1 switches on core 1)
+[pid: 3352|app: 0|req: 3/4] 127.0.0.1 () {42 vars in 745 bytes} [Thu Mar 15 22:57:05 2018] GET /static/css/reset.css => generated 94 bytes in 1704 msecs (HTTP/1.1 404) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 3352|app: 0|req: 3/5] 127.0.0.1 () {42 vars in 743 bytes} [Thu Mar 15 22:57:05 2018] GET /static/css/main.css => generated 93 bytes in 1705 msecs (HTTP/1.1 404) 4 headers in 114 bytes (1 switches on core 0)
+None
+False
+[pid: 3353|app: 0|req: 3/6] 127.0.0.1 () {42 vars in 774 bytes} [Thu Mar 15 22:57:07 2018] GET /static/images/logo02.png => generated 98 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 114 bytes (1 switches on core 0)
+None
+False
+[pid: 3357|app: 0|req: 1/7] 127.0.0.1 () {42 vars in 748 bytes} [Thu Mar 15 22:57:24 2018] GET /favicon.ico => generated 85 bytes in 14973 msecs (HTTP/1.1 404) 4 headers in 114 bytes (1 switches on core 0)
+None
+False
+user_name: xiaoming
+数据库查询出来的：xiaoming
+hhh
+[pid: 3354|app: 0|req: 1/8] 127.0.0.1 () {52 vars in 1029 bytes} [Thu Mar 15 22:58:17 2018] POST /user/login_handler/ => generated 0 bytes in 35388 msecs (HTTP/1.1 302) 7 headers in 265 bytes (1 switches on core 0)
+[pid: 3353|app: 0|req: 4/9] 127.0.0.1 () {46 vars in 923 bytes} [Thu Mar 15 22:58:55 2018] GET /user/info => generated 0 bytes in 1336 msecs (HTTP/1.1 301) 4 headers in 191 bytes (1 switches on core 1)
+1
+-1
+[pid: 3353|app: 0|req: 5/10] 127.0.0.1 () {46 vars in 925 bytes} [Thu Mar 15 22:58:56 2018] GET /user/info/ => generated 3698 bytes in 187 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+1
+1
+1
+[pid: 3353|app: 0|req: 7/11] 127.0.0.1 () {42 vars in 811 bytes} [Thu Mar 15 22:58:59 2018] GET /static/css/reset.css => generated 94 bytes in 572 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 1)
+[pid: 3353|app: 0|req: 7/12] 127.0.0.1 () {42 vars in 809 bytes} [Thu Mar 15 22:58:59 2018] GET /static/css/main.css => generated 93 bytes in 554 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 8/13] 127.0.0.1 () {42 vars in 836 bytes} [Thu Mar 15 22:58:59 2018] GET /static/images/logo.png => generated 96 bytes in 327 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 1)
+[pid: 3354|app: 0|req: 2/14] 127.0.0.1 () {42 vars in 816 bytes} [Thu Mar 15 22:58:59 2018] GET /static/js/jquery-1.12.4.min.js => generated 104 bytes in 1464 msecs (HTTP/1.1 404) 5 headers in 190 bytes (1 switches on core 1)
+1
+-1
+[pid: 3354|app: 0|req: 3/15] 127.0.0.1 () {46 vars in 925 bytes} [Thu Mar 15 23:12:20 2018] GET /user/info/ => generated 3698 bytes in 1615 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+1
+1
+1
+[pid: 3354|app: 0|req: 4/16] 127.0.0.1 () {42 vars in 816 bytes} [Thu Mar 15 23:12:24 2018] GET /static/js/jquery-1.12.4.min.js => generated 104 bytes in 409 msecs (HTTP/1.1 404) 5 headers in 190 bytes (1 switches on core 1)
+[pid: 3353|app: 0|req: 10/17] 127.0.0.1 () {42 vars in 811 bytes} [Thu Mar 15 23:12:24 2018] GET /static/css/reset.css => generated 94 bytes in 443 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 0)
+[pid: 3353|app: 0|req: 10/18] 127.0.0.1 () {42 vars in 809 bytes} [Thu Mar 15 23:12:24 2018] GET /static/css/main.css => generated 93 bytes in 451 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 1)
+1
+[pid: 3352|app: 0|req: 4/19] 127.0.0.1 () {42 vars in 836 bytes} [Thu Mar 15 23:12:24 2018] GET /static/images/logo.png => generated 96 bytes in 892 msecs (HTTP/1.1 404) 5 headers in 189 bytes (1 switches on core 1)
+1
+-1
+[pid: 3352|app: 0|req: 5/20] 127.0.0.1 () {46 vars in 925 bytes} [Thu Mar 15 23:17:43 2018] GET /user/info/ => generated 3698 bytes in 190 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 11/21] 127.0.0.1 () {44 vars in 897 bytes} [Thu Mar 15 23:17:46 2018] GET /goods/index/ => generated 12929 bytes in 959 msecs (HTTP/1.1 200) 5 headers in 200 bytes (1 switches on core 0)
+1
+-1
+[pid: 3353|app: 0|req: 12/22] 127.0.0.1 () {44 vars in 895 bytes} [Thu Mar 15 23:17:54 2018] GET /user/info/ => generated 3698 bytes in 136 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 1)
+1
+[pid: 3353|app: 0|req: 13/23] 127.0.0.1 () {44 vars in 893 bytes} [Thu Mar 15 23:17:55 2018] GET /cart/cart/ => generated 6189 bytes in 85 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+1
+-1
+[pid: 3353|app: 0|req: 14/24] 127.0.0.1 () {44 vars in 893 bytes} [Thu Mar 15 23:17:56 2018] GET /user/info/ => generated 3698 bytes in 146 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 1)
+1
+[pid: 3353|app: 0|req: 15/25] 127.0.0.1 () {44 vars in 897 bytes} [Thu Mar 15 23:17:57 2018] GET /user/logout/ => generated 0 bytes in 61 msecs (HTTP/1.1 302) 6 headers in 222 bytes (1 switches on core 0)
+None
+False
+[pid: 3352|app: 0|req: 6/26] 127.0.0.1 () {44 vars in 895 bytes} [Thu Mar 15 23:17:58 2018] GET /user/login/ => generated 5183 bytes in 112 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 1)
+None
+False
+user_name: xiaoming
+数据库查询出来的：xiaoming
+hhh
+[pid: 3352|app: 0|req: 7/27] 127.0.0.1 () {52 vars in 1096 bytes} [Thu Mar 15 23:18:07 2018] POST /user/login_handler/ => generated 0 bytes in 139 msecs (HTTP/1.1 302) 7 headers in 265 bytes (1 switches on core 0)
+[pid: 3353|app: 0|req: 16/28] 127.0.0.1 () {46 vars in 923 bytes} [Thu Mar 15 23:18:07 2018] GET /user/info => generated 0 bytes in 120 msecs (HTTP/1.1 301) 4 headers in 191 bytes (1 switches on core 1)
+1
+-1
+[pid: 3353|app: 0|req: 17/29] 127.0.0.1 () {46 vars in 925 bytes} [Thu Mar 15 23:18:07 2018] GET /user/info/ => generated 3698 bytes in 34 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+[pid: 3353|app: 0|req: 18/30] 127.0.0.1 () {44 vars in 897 bytes} [Thu Mar 15 23:18:09 2018] GET /user/order_1 => generated 0 bytes in 62 msecs (HTTP/1.1 301) 4 headers in 194 bytes (1 switches on core 1)
+1
+[pid: 3352|app: 0|req: 8/31] 127.0.0.1 () {44 vars in 899 bytes} [Thu Mar 15 23:18:09 2018] GET /user/order_1/ => generated 8135 bytes in 554 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 1)
+[pid: 3352|app: 0|req: 9/32] 127.0.0.1 () {44 vars in 894 bytes} [Thu Mar 15 23:18:11 2018] GET /user/site => generated 0 bytes in 75 msecs (HTTP/1.1 301) 4 headers in 191 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 19/33] 127.0.0.1 () {44 vars in 896 bytes} [Thu Mar 15 23:18:11 2018] GET /user/site/ => generated 6712 bytes in 65 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 20/34] 127.0.0.1 () {44 vars in 897 bytes} [Thu Mar 15 23:18:13 2018] GET /goods/index/ => generated 12929 bytes in 253 msecs (HTTP/1.1 200) 5 headers in 200 bytes (1 switches on core 1)
+1
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 3.418 seconds.
+Prefix dict has been built succesfully.
+[pid: 3353|app: 0|req: 21/35] 127.0.0.1 () {44 vars in 898 bytes} [Thu Mar 15 23:18:17 2018] GET /search/?q=aa => generated 5168 bytes in 5203 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 0)
+1
+[pid: 3354|app: 0|req: 5/36] 127.0.0.1 () {44 vars in 901 bytes} [Thu Mar 15 23:18:37 2018] GET /cart/add_2_1/ => generated 0 bytes in 2748 msecs (HTTP/1.1 302) 6 headers in 222 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 22/37] 127.0.0.1 () {44 vars in 895 bytes} [Thu Mar 15 23:18:40 2018] GET /cart/cart/ => generated 6849 bytes in 177 msecs (HTTP/1.1 200) 5 headers in 199 bytes (1 switches on core 1)
+1
+count: 2
+1
+count: 3
+[pid: 3353|app: 0|req: 23/38] 127.0.0.1 () {44 vars in 854 bytes} [Thu Mar 15 23:18:48 2018] GET /cart/change/?cart_id=1&count=2 => generated 13 bytes in 221 msecs (HTTP/1.1 200) 5 headers in 189 bytes (1 switches on core 0)
+[pid: 3352|app: 0|req: 10/39] 127.0.0.1 () {44 vars in 854 bytes} [Thu Mar 15 23:18:48 2018] GET /cart/change/?cart_id=1&count=3 => generated 13 bytes in 250 msecs (HTTP/1.1 200) 5 headers in 189 bytes (1 switches on core 1)
+1
+[pid: 3352|app: 0|req: 11/40] 127.0.0.1 () {44 vars in 909 bytes} [Thu Mar 15 23:18:48 2018] GET /order/place_order/ => generated 7793 bytes in 261 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 0)
+1
+1
+[pid: 3353|app: 0|req: 24/41] 127.0.0.1 () {50 vars in 1026 bytes} [Thu Mar 15 23:18:53 2018] POST /order/order_handler/ => generated 11 bytes in 634 msecs (HTTP/1.1 200) 5 headers in 189 bytes (1 switches on core 1)
+1
+[pid: 3353|app: 0|req: 25/42] 127.0.0.1 () {44 vars in 907 bytes} [Thu Mar 15 23:18:53 2018] GET /user/order_1/ => generated 9429 bytes in 676 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 0)
+1
+[pid: 3353|app: 0|req: 26/43] 127.0.0.1 () {50 vars in 1001 bytes} [Thu Mar 15 23:18:57 2018] POST /order/pay/ => generated 33 bytes in 138 msecs (HTTP/1.1 200) 5 headers in 189 bytes (1 switches on core 1)
+1
+[pid: 3353|app: 0|req: 27/44] 127.0.0.1 () {46 vars in 933 bytes} [Thu Mar 15 23:18:59 2018] GET /user/order_1/ => generated 9449 bytes in 129 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 0)

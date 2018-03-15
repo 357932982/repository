@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pj=ze4(6ti1^9k-1lzz2)re%p5@peht(7%s9wmm980^979-9+i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 # Application definition
 
@@ -129,6 +129,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+STATIC_ROOT = '/var/www/dailyfresh/static'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 # MEDIA_ROOT = '/var/www/daily/static'
 
@@ -151,7 +153,6 @@ SESSION_COOKIE_AGE = 60 * 30  # 30分钟
 SESSION_SAVE_EVERY_REQUEST = True
 # 关闭浏览器，则cookie失效
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 
 # 搜索引擎
 HAYSTACK_CONNECTIONS = {
