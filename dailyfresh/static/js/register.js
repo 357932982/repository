@@ -69,8 +69,10 @@ $(function(){
 		}
 		
 	}
+	$('.reg_form').submit(function() {
+		return check_submit()
 
-
+	});
 
 
 });
@@ -135,15 +137,19 @@ function check_email(){
 }
 
 function check_submit(){
+	alert('fd')
 
+	check_user_name();
     check_pwd();
     check_email();
     if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
     {
+        alert("aa")
         return true;
     }
     else
     {
+    	alert("bb")
         return false;
     }
 }

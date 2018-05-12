@@ -17,6 +17,7 @@ def register(request):
 def register_handler(request):
     # 接收用户信息
     user_name = request.POST['user_name']
+    print(user_name)
     pwd = request.POST['pwd']
     email = request.POST['email']
     # 密码加密
@@ -25,7 +26,7 @@ def register_handler(request):
     pwd1 = s1.hexdigest()
     UserInfo.user.create_user(user_name, pwd1, email)
     red = HttpResponseRedirect('/user/login')
-    red.set_cookie('user_name', user_name)
+    red.set_cookie('user_name', user_name.encode("utf-8"))
     return red
 
 
@@ -38,8 +39,9 @@ def user_name_validate(request):
 
 def login(request):
     request.session.clear()
-    user_name = request.COOKIES.get('user_name', '')
-    context = {'title': '登录', 'user_name': user_name}
+    # user_name = request.COOKIES.get('user_name', '')
+    # context = {'title': '登录', 'user_name': user_name}
+    context = {'title': '登录'}
     return render(request, 'df_user/login.html', context)
 
 
@@ -55,7 +57,8 @@ def login_handler(request):
     pwd = post.get('pwd', '')
     remember = post.get('remember', '0')
     users = UserInfo.user.filter(user_name=user_name)
-    print('数据库查询出来的：%s' % users[0].user_name)
+    print("users:", users)
+    print('数据库查询出来的：%s' % users[0].user_name.encode("utf-8"))
     if 1 == len(users):
         s1 = sha1()
         s1.update(pwd.encode('utf-8'))
@@ -82,8 +85,8 @@ def login_handler(request):
 
 # 转到个人中心
 def info(request):
-    goods_ids = request.COOKIES.get('goods_ids', -1)
-    print(goods_ids)
+    user_id = request.session.get("user_id")
+    goods_ids = request.COOKIES.get('%s_goods_ids' % user_id, -1)
     goods_list = []
     if goods_ids != -1:
         goods_id_list = goods_ids.split(',')

@@ -27,12 +27,13 @@
 
             $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
             $('#add_cart').on("click", function () {
+                add_jump();
                 var count = $('#ammount').val();
                 var url = '/cart/add_'+goods_id+'_'+count;
                 $.get(url, function (data) {
                     $('#show_count').text(data.data);
                 });
-                add_jump();
+
             });
             function add_jump(){
                 $(".add_jump").stop().animate({

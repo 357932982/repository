@@ -44,7 +44,8 @@ def detail(request, type, id):
     context = {'title': '商品详情', 'get_cart': 1, 'goods': goods, 'new_goods': new_goods, 'typeinfo': typeinfo}
     response = render(request, 'df_goods/detail.html', context)
     # 保存goods_id信息到cookie中
-    goods_ids = request.COOKIES.get('goods_ids', -1)
+    user_id = request.session.get("user_id")
+    goods_ids = request.COOKIES.get('%s_goods_ids' % user_id, -1)
     if goods_ids != -1:
         goods_id_list = goods_ids.split(',')
         if goods_id_list.count(id) >= 1:
@@ -55,5 +56,5 @@ def detail(request, type, id):
         goods_ids = ','.join(goods_id_list)
     else:
         goods_ids = id
-    response.set_cookie('goods_ids', goods_ids)
+    response.set_cookie('%s_goods_ids' % user_id, goods_ids)
     return response

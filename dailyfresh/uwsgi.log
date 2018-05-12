@@ -216,3 +216,9 @@ count: 3
 [pid: 3353|app: 0|req: 26/43] 127.0.0.1 () {50 vars in 1001 bytes} [Thu Mar 15 23:18:57 2018] POST /order/pay/ => generated 33 bytes in 138 msecs (HTTP/1.1 200) 5 headers in 189 bytes (1 switches on core 1)
 1
 [pid: 3353|app: 0|req: 27/44] 127.0.0.1 () {46 vars in 933 bytes} [Thu Mar 15 23:18:59 2018] GET /user/order_1/ => generated 9449 bytes in 129 msecs (HTTP/1.1 200) 6 headers in 353 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 2 seconds
+worker 2 buried after 2 seconds
+worker 3 buried after 2 seconds
+worker 4 buried after 2 seconds
+goodbye to uWSGI.

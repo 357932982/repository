@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pj=ze4(6ti1^9k-1lzz2)re%p5@peht(7%s9wmm980^979-9+i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -129,7 +129,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-STATIC_ROOT = '/var/www/dailyfresh/static'
+# STATIC_ROOT = '/var/www/dailyfresh/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 # MEDIA_ROOT = '/var/www/daily/static'
@@ -137,9 +137,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_EXEMPT_URLS = [
     'user/info/',
     'user/order/',
+    'user/order_1/',
     'user/site/',
     'user/logout/',
-    'goods/cart/',
+    'cart/',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
