@@ -6,12 +6,13 @@ var error_check = false;
 
 $(function(){
 
-	$('#user_name').blur(function() {
+	$('#name').blur(function() {
+
 		check_user_name();
 	});
 
-	$('#user_name').focus(function () {
-		$('#user_name').next().hide();
+	$('#name').focus(function () {
+		$('#name').next().hide();
     });
 
 	$('#pwd').blur(function() {
@@ -67,7 +68,7 @@ $(function(){
 			$('#cpwd').next().hide();
 			error_check_password = false;
 		}
-		
+
 	}
 	$('.reg_form').submit(function() {
 		return check_submit()
@@ -78,12 +79,12 @@ $(function(){
 });
 
 function check_user_name(){
-	var user_name = $('#user_name').val();
-	var tip = $('#user_name').next();
+	var user_name = $('#name').val();
+	var tip = $('#name').next();
 	var len = user_name.length;
-	if(len<5||len>20)
+	if(len<1||len>20)
 	{
-		tip.html('请输入5-20个字符的用户名');
+		tip.html('请输入1-20个字符的用户名');
 		tip.show();
 		error_name = true;
 	}
@@ -137,19 +138,16 @@ function check_email(){
 }
 
 function check_submit(){
-	alert('fd')
 
 	check_user_name();
     check_pwd();
     check_email();
     if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
     {
-        alert("aa")
         return true;
     }
     else
     {
-    	alert("bb")
         return false;
     }
 }

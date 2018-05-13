@@ -26,7 +26,7 @@ def register_handler(request):
     pwd1 = s1.hexdigest()
     UserInfo.user.create_user(user_name, pwd1, email)
     red = HttpResponseRedirect('/user/login')
-    red.set_cookie('user_name', user_name.encode("utf-8"))
+    red.set_cookie('user_name', user_name)
     return red
 
 
@@ -39,9 +39,9 @@ def user_name_validate(request):
 
 def login(request):
     request.session.clear()
-    # user_name = request.COOKIES.get('user_name', '')
-    # context = {'title': '登录', 'user_name': user_name}
-    context = {'title': '登录'}
+    user_name = request.COOKIES.get('user_name', '')
+    context = {'title': '登录', 'user_name': user_name}
+    # context = {'title': '登录'}
     return render(request, 'df_user/login.html', context)
 
 
@@ -66,8 +66,8 @@ def login_handler(request):
         if pwd1 == users[0].user_password:
             red = HttpResponseRedirect('/user/info')
             if '1' == remember:
-                # 这里一定要设置编码格式，不然报错
-                red.set_cookie('user_name', user_name.encode('utf-8'))
+                # python2中这里一定要设置编码格式，不然报错
+                red.set_cookie('user_name', user_name)
             else:
                 red.set_cookie('user_name', '', max_age=-1)
             request.session['user_id'] = users[0].id
